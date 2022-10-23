@@ -7,9 +7,9 @@
 # gde je m broj vrsta, a n broj kolona, koji imaju osobinu da je zbir indeksa (i + j)
 # paran broj (A11 + A13 + ...)
 
-function zbirSvihElemenataSaParnimIndeksom(A)
+function zbirSvihElemenataSaParnimIndeksom(A)   # matrica proizvoljnih dimenzija
 
-    maska = zeros(Bool, 5, 5)
+    maska = convert.(Bool, zeros(size(A)))
 
     maska[1:2:end, 1:2:end] .= 1
     maska[2:2:end, 2:2:end] .= 1
@@ -17,6 +17,6 @@ function zbirSvihElemenataSaParnimIndeksom(A)
     return sum(A[maska])
 end
 
-A = [1 2 3 4 2; 2 3 42 5 4; 2 3 42 1 5; 23 4 2 5 5; 2 23 4 2 1]
+A = round.(rand(3, 3) * 100)
 
 zbirSvihElemenataSaParnimIndeksom(A)
