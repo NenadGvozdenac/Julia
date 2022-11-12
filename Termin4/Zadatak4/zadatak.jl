@@ -37,9 +37,22 @@ sol = solve(problem)
 
 promena_pozicije_x1 = [x[1] for x in sol.u]
 promena_pozicije_x2 = [x[3] for x in sol.u]
+promena_brzine_m1 = [x[2] for x in sol.u]
 
 opseg1 = 0:0.01:18
-prva_jednacina = plot(opseg1, f.(opseg1), xticks=0:1:18, yticks=0:0.25:1)
-druga_jednacina = plot(sol.t, [promena_pozicije_x1 promena_pozicije_x2], xticks=0:1:12)
+prva_jednacina = plot(opseg1, f.(opseg1), xticks=0:1:18, yticks=0:0.25:1, label="f(t)")
+druga_jednacina = plot(sol.t, [promena_pozicije_x1 promena_pozicije_x2], xticks=0:1:12, label=["Promena x1" "Promena x2"])
 
-plot(prva_jednacina, druga_jednacina, layout=(2,1))
+treca_jednacina = plot(sol.t, [promena_brzine_m1], xticks=0:1:18, label="Promena brzine m1")
+
+ubrzanje_m1 = diff(promena_brzine_m1) ./ diff(sol.t)
+
+~, najvece_ubrzanje = findmax(abs.(ubrzanje_m1))
+~, najveca_brzina = findmax(abs.(promena_brzine_m1))
+
+treca_jednacina = plot(sol.t[1:end-1], [ubrzanje_m1], label="Ubrzanje m1", xticks=0:1:12)
+plot!([sol.t[najvece_ubrzanje]], [ubrzanje_m1[najvece_ubrzanje]], markershape=:o, label="Najvece ubrzanje m1")
+plot!([sol.t], promena_brzine_m1, label="Promena brzine m1")
+plot!([sol.t[najveca_brzina]], [promena_brzine_m1[najveca_brzina]], markershape=:o, label="Najveca brzina m1")
+
+plot(prva_jednacina, druga_jednacina, treca_jednacina, layout=(3,1), lw=2)
