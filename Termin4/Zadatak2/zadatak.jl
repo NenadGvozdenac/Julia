@@ -13,7 +13,7 @@ end
 
 function diferencijalna_jednacina!(dx, x, p, t)
 
-    m1, m2, c1, c2, k1, k2, g = p
+    m1, m2, c1, c2, k1, k2, g = p       
 
     dx[1] = x[2]
     dx[2] = (1/m1) * (m1*g + k2 * (x[3] - x[1]) - k1 * x[1] - x[2] * c1)
@@ -49,7 +49,7 @@ a = diff(brzina_m1) ./ diff(sol.t)
 
 ~, najveca_brzina = findmax(abs.(a))
 
-treca_jednacina = plot(sol.t[1:end-1], [a], label="Brzina m1")
+treca_jednacina = plot(sol.t[1:end-1], [a], label="Ubrzanje m1")
 plot!([sol.t[najveca_brzina]], [a[najveca_brzina]], label="Najveca brzina m1", markershape=:o, color=:red)
 
 plot(prva_jednacina, druga_jednacina, treca_jednacina, layout=(3,1), xlabel="t", ylabel="y", xticks=0:1:10)

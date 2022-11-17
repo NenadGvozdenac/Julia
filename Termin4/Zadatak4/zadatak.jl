@@ -56,3 +56,4 @@ plot!([sol.t], promena_brzine_m1, label="Promena brzine m1")
 plot!([sol.t[najveca_brzina]], [promena_brzine_m1[najveca_brzina]], markershape=:o, label="Najveca brzina m1")
 
 plot(prva_jednacina, druga_jednacina, treca_jednacina, layout=(3,1), lw=2)
+plot!(size=(600, 600))
