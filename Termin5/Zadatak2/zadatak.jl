@@ -21,7 +21,6 @@ function sistem!(dx, x, p, t)
     dx[1] = x[2]
 	dx[2] = (-1/J) * (k1 * x[1] + k2 * R * (R * x[1] + x[3]) + c1 * R^2 * x[2])
 	dx[3] = (L1 / (c2 * L2 ^ 2)) * (L1 * (f - k2 * (R * x[1] + x[3])))
-    # dx[3] = 1/(c2*L2^2) * (-k2*R*L1*x[1] - k2*L1*x[3] + L1*c2*f)
 end
 
 opseg = (0.0, 100.0)
